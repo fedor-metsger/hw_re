@@ -1,6 +1,5 @@
 
 from pprint import pprint
-## Читаем адресную книгу в формате CSV в список contacts_list:
 import csv
 import re
 
@@ -50,7 +49,7 @@ def compare_and_join(l1, l2):
         return True
     return False
 
-
+## Читаем адресную книгу в формате CSV в список contacts_list:
 with open("phonebook_raw.csv") as f:
     rows = csv.reader(f, delimiter=",")
     contacts_list = list(rows)
@@ -58,7 +57,6 @@ pprint(contacts_list)
 
 ## 1. Выполните пункты 1-3 задания.
 ## Ваш код
-
 temp_list = []
 for l in contacts_list:
     # Нормализуем фамилию, имя отчество
@@ -67,7 +65,6 @@ for l in contacts_list:
         # Нормализуем номер телефона
         phone_num = normalize_phonenum(l[5])
         temp_list.append([lname, name, sname, l[3], l[4], phone_num, l[6]])
-
 temp_list = sorted(temp_list, key=lambda d: (d[0], d[1], d[2]))
 
 # Удаляем дубли
@@ -82,6 +79,7 @@ while i < len(temp_list):
     i += 1
 print("================ Результат =================")
 pprint(contacts_list)
+
 ## 2. Сохраните получившиеся данные в другой файл.
 ## Код для записи файла в формате CSV:
 with open("phonebook.csv", "w") as f:
