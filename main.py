@@ -65,17 +65,14 @@ for l in contacts_list:
         # Нормализуем номер телефона
         phone_num = normalize_phonenum(l[5])
         temp_list.append([lname, name, sname, l[3], l[4], phone_num, l[6]])
-temp_list = sorted(temp_list, key=lambda d: (d[0], d[1], d[2]))
 
 # Удаляем дубли
+temp_list = sorted(temp_list, key=lambda d: (d[0], d[1], d[2]))
 contacts_list, i = [], 0
 while i < len(temp_list):
-    if i + 1 < len(temp_list):
-        if (compare_and_join(temp_list[i], temp_list[i + 1])):
-            contacts_list.append(temp_list[i])
-            i += 1
-        else:
-            contacts_list.append(temp_list[i])
+    while i + 1 < len(temp_list) and compare_and_join(temp_list[i], temp_list[i + 1]):
+        del temp_list[i + 1]
+    contacts_list.append(temp_list[i])
     i += 1
 print("================ Результат =================")
 pprint(contacts_list)
